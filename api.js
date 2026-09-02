@@ -16,9 +16,15 @@ const server = http.createServer((requisicao, resposta)=> {
     if (requisicao.method == 'GET' && requisicao.url == '/tarefas') {
         resposta.statusCode = 200
         resposta.end(JSON.stringify(tarefas))
-    } else if (requisicao,method == 'GET' && urlObj.pathname == '/tarefas/busca') {
-        const titulo = urlObj.searchParams.get('titulo');
-    }
+
+    }else if (requisicao.method == 'GET' && urlObj.pathname == '/tarefas/busca') { 
+    const titulo = urlObj.searchParams.get('titulo');
+
+    const resultado = tarefas.filter(tarefa => tarefa.titulo == titulo);
+
+    resposta.statusCode = 200;
+    resposta.end(JSON.stringify(resultado));
+}
     else if (requisicao.method == 'POST' && requisicao.url == '/tarefas') {
         let body = ''
 
